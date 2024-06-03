@@ -21,6 +21,7 @@ public class UPSCRegistrationTest extends runnerClass {
 	@Test(dataProvider="testData")
 	public void register(String firstName,String sex,String disability,String day,String month,String year,String city,String state,String nationality,String mobileNo,String email,String password,String Title, String testName, String author,String category) throws IOException, InterruptedException {
 		System.out.print("------------");
+		System.out.print("-----Line for Git Practice-------");
 		register.extentReport(testName, author, category);
 		register.fillNames(firstName);
 		register.selectGender(sex);
