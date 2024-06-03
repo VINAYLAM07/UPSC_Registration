@@ -38,6 +38,7 @@ public class UPSCRegistrationTest extends runnerClass {
 		register.enterpassword(password);
 		register.enterCaptha();
 		register.submit(Title);
+		System.out.print("-----updated from project 2 for Git Practice-------");
 	}
 
 
