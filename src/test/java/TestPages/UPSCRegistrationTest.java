@@ -23,6 +23,7 @@ public class UPSCRegistrationTest extends runnerClass {
 		System.out.print("------------");
 		System.out.print("-----Line for Git Practice-------");
 		System.out.print("-----Line 2 for Git Practice-------");
+		System.out.print("-----Line 3 for Git Practice-------");
 		register.extentReport(testName, author, category);
 		register.fillNames(firstName);
 		register.selectGender(sex);
