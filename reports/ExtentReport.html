@@ -1,0 +1,986 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<meta charset='utf-8' /> 
+	<meta name='description' content='' />
+	<meta name='robots' content='noodp, noydir' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<meta id="timeStampFormat" name="timeStampFormat" content='MMM d, yyyy hh:mm:ss a'/>
+	
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<link href='https://cdn.rawgit.com/anshooarora/extentreports-java/b4a58fcfd1e137bd9287244035a7c80d3d73b3af/dist/css/extent.css' type='text/css' rel='stylesheet' />
+	
+	<title>ExtentReports</title>
+
+	<style type='text/css'>
+	</style>
+</head>
+
+	<body class='extent standard default hide-overflow '>
+		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
+			<span><i class='material-icons'>desktop_windows</i></span>
+		</div>
+
+<nav>
+	<div class="nav-wrapper">
+		<a href="#!" class="brand-logo blue darken-3">Extent</a>
+
+		<!-- slideout menu -->
+		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
+						<li class='waves-effect'><a href='#!' view='category-view' onclick="configureView(1)"><i class='material-icons'>label_outline</i></a></li>
+				<li class='waves-effect'><a href='#!' view='author-view' onclick="configureView(3)"><i class='material-icons'>person</i></a></li>
+			<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
+		</ul>
+
+		<!-- report name -->
+		<span class='report-name'>ExtentReports</span>
+		
+		<!-- report headline -->
+		<span class='report-headline'></span>
+
+		<!-- nav-right -->
+		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
+			<li>
+                <a href='#!'>
+                    <span class='label suite-start-time blue darken-3'>Apr 23, 2024 03:25:22 PM</span>
+				</a>
+			</li>
+			<li>
+                <a href='#!'>
+                    <span class='label blue darken-3'>3.1.3</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+		<!-- container -->
+		<div class='container'>
+
+<div id='test-view' class='view'>
+				
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- test toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>warning</i> Status
+				</a>
+				<ul id='tests-toggle' class='dropdown-content'>
+											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+					<li class='divider'></li>
+					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
+				</ul>
+			</div>
+			<!-- test toggle -->
+
+			<!-- category toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button category-toggle' data-activates='category-toggle' data-constrainwidth='false' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>local_offer</i> Category
+				</a>
+				<ul id='category-toggle' class='dropdown-content'>
+					<li><a href='#'>Sanity</a></li>
+					<li class='divider'></li>
+					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
+				</ul>
+			</div>
+			<!-- category toggle -->
+
+			<!-- clear filters -->
+			<div class='chip transparent hide'>
+				<a class='' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+					<i class='material-icons'>close</i> Clear
+				</a>
+			</div>
+			<!-- clear filters -->
+
+			<!-- enable dashboard -->
+			<div id='toggle-test-view-charts' class='chip transparent'>
+				<a class='pink-text' id='enable-dashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+					<i class='material-icons'>track_changes</i> Dashboard
+				</a>
+			</div>
+			<!-- enable dashboard -->
+
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+
+<div id='test-view-charts' class='subview-full'>
+	<div id='charts-row' class='row nm-v nm-h'>
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Tests</div>
+				<div class='chart-box'>
+					<canvas id='parent-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>1</span> test(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
+		
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Steps</div>
+				<div class='chart-box'>
+					<canvas id='child-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>85</span> step(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Tests</h5>
+			<ul id='test-collection' class='test-collection'>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
+					<div class='test-heading'>
+						<span class='test-name'>UPSC_Registration</span>
+						<span class='test-time'>Apr 23, 2024 03:25:22 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Apr 23, 2024 03:25:22 PM</span>
+	<span class='label end-time'>Apr 23, 2024 03:25:52 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 29s+848ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>Sanity</span>
+			</div>
+			<div class='author-list'>
+				<span class='author label white-text'>VinayLam</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:22 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:22 PM</td>
+					<td class='step-details'>The Type Text is successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:23 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:23 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: fstnameis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:23 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:23 PM</td>
+					<td class='step-details'>The Type Text is successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:24 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:24 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: fatherfstnameis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:24 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:24 PM</td>
+					<td class='step-details'>The Type Text is successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:24 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:25 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: motherfstnameis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:25 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:25 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:25 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: sexis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:25 PM</td>
+					<td class='step-details'>Selecting by value is done</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:26 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:26 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: communityis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:26 PM</td>
+					<td class='step-details'>Selecting by Index is done</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:26 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:26 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: handicappis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:26 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:27 PM</td>
+					<td class='step-details'>Selecting by Visible Text is done</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:27 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:27 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.xpath: //*[@id='dobim ']is Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:27 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:27 PM</td>
+					<td class='step-details'>Element with By.xpath: //*[@id='dobim '] is clicked successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:28 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:28 PM</td>
+					<td class='step-details'>Moving to Element is done</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:28 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:29 PM</td>
+					<td class='step-details'>Moving to Element is done</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:29 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:29 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:29 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.xpath: //span[@id='calBorder']/span/table/tbody/tr/following::tr/following::tr/td/table/tbody//tdis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:30 PM</td>
+					<td class='step-details'>The Preference Selection by locator By.xpath: //span[@id='calBorder']/span/table/tbody/tr/following::tr/following::tr/td/table/tbody//tdis successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:30 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:30 PM</td>
+					<td class='step-details'>The Type Text is successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:30 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:30 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: pobis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:30 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:31 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:31 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: sobis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:31 PM</td>
+					<td class='step-details'>Selecting by value is done</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:31 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:31 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:32 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: nationalityis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:32 PM</td>
+					<td class='step-details'>Selecting by value is done</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:32 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:32 PM</td>
+					<td class='step-details'>The Type Text is successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:32 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:32 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: mobilenois Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:33 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:33 PM</td>
+					<td class='step-details'>The Type Text is successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:33 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:33 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: mobileno_confirmis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:33 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:34 PM</td>
+					<td class='step-details'>The Type Text is successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:34 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:34 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: Emailis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:34 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:34 PM</td>
+					<td class='step-details'>The Type Text is successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:35 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:35 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: confirmEmailis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:35 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:35 PM</td>
+					<td class='step-details'>The Type Text is successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:35 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:35 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: DesiredPasswordis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:36 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:36 PM</td>
+					<td class='step-details'>The Type Text is successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:36 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:36 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: ConfirmPasswordis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:37 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:37 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:37 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.name: submitis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:37 PM</td>
+					<td class='step-details'>Scrolling to Element is successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:49 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:50 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.id: phraseis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:50 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:50 PM</td>
+					<td class='step-details'>HighLighting of the Element byBy.name: submitis Successful</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:51 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:51 PM</td>
+					<td class='step-details'>Element with By.name: submit is clicked successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:51 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:51 PM</td>
+					<td class='step-details'>The actual value is equal to the expected value</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:52 PM</td>
+					<td class='step-details'>The Execution is Passed</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:25:52 PM</td>
+					<td class='step-details'>The ScreenShot is Captured Successfully</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866122861.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866122861.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866122861.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866122985.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866122985.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866122985.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866123264.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866123264.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866123264.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866123384.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866123384.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866123384.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866123723.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866123723.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866123723.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866123835.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866123835.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866123835.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124134.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124134.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124134.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124262.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124262.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124262.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124625.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124625.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124625.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124731.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124731.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124731.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124998.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124998.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866124998.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125118.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125118.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125118.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125365.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125365.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125365.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125689.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125689.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125689.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125800.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125800.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125800.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125924.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125924.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866125924.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866126255.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866126255.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866126255.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866126360.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866126360.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866126360.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866126708.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866126708.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866126708.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866126814.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866126814.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866126814.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127049.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127049.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127049.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127168.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127168.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127168.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127434.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127434.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127434.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127560.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127560.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127560.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127861.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127861.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127861.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127984.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127984.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866127984.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866128434.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866128434.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866128434.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866128590.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866128590.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866128590.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866129030.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866129030.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866129030.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866129161.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866129161.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866129161.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866129642.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866129642.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866129642.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866129893.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866129893.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866129893.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130002.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130002.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130002.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130108.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130108.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130108.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130419.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130419.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130419.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130518.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130518.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130518.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130752.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130752.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130752.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130874.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130874.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866130874.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131081.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131081.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131081.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131379.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131379.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131379.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131482.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131482.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131482.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131587.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131587.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131587.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131805.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131805.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866131805.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132070.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132070.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132070.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132164.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132164.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132164.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132271.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132271.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132271.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132561.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132561.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132561.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132671.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132671.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132671.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132908.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132908.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866132908.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133017.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133017.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133017.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133323.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133323.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133323.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133421.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133421.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133421.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133658.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133658.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133658.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133762.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133762.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866133762.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134088.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134088.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134088.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134181.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134181.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134181.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134391.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134391.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134391.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134502.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134502.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134502.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134841.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134841.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134841.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134928.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134928.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866134928.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135148.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135148.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135148.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135269.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135269.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135269.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135573.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135573.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135573.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135663.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135663.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135663.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135897.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135897.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866135897.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136020.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136020.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136020.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136322.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136322.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136322.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136429.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136429.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136429.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136698.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136698.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136698.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136807.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136807.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866136807.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866137305.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866137305.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866137305.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866137549.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866137549.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866137549.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866137673.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866137673.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866137673.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866137785.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866137785.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866137785.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866150046.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866150046.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866150046.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866150140.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866150140.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866150140.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866150339.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866150339.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866150339.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866150450.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866150450.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866150450.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866151420.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866151420.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866151420.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866151524.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866151524.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866151524.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866151771.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866151771.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866151771.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866151880.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866151880.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866151880.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866152180.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866152180.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866152180.png'></li>
+								<li><img data-featherlight='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866152423.png' width='10%' src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866152423.png' data-src='C:\Users\2303872\eclipse-workspace\UPSC/reportscreenshots/1713866152423.png'></li>
+							</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- subview left -->
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='test-name'></h5>
+
+			<div id='step-filters' class="right">
+				<span class="blue-text" status="info" alt="info" title="info"><i class="material-icons">info_outline</i></span>
+				<span class="green-text" status="pass" alt="pass" title="pass"><i class="material-icons">check_circle</i></span>
+				<span class="red-text" status="fail" alt="fail" title="fail"><i class="material-icons">cancel</i></span>
+				<span class="red-text text-darken-4" status="fatal" alt="fatal" title="fatal"><i class="material-icons">cancel</i></span>
+				<span class="pink-text text-lighten-1" status="error" alt="error" title="error"><i class="material-icons">error</i></span>
+				<span class="orange-text" alt="warning" status="warning" title="warning"><i class="material-icons">warning</i></span>
+				<span class="teal-text" status="skip" alt="skip" title="skip"><i class="material-icons">redo</i></span>
+				<span status="clear" alt="Clear filters" title="Clear filters"><i class="material-icons">clear</i></span>
+			</div>
+		</div>
+	</div>
+	<!-- subview right -->
+
+</div>
+<!-- test view -->
+<div id='category-view' class='view hide'>
+
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+				
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Categories</h3>
+			<ul id='category-collection' class='category-collection'>
+				
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>Sanity</span>
+						<span class='category-status right'>
+							<span class='label pass'>1</span>
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							<span class='label green accent-4 white-text'>Passed: 1</span>
+							
+							
+						</div>
+					
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Apr 23, 2024 03:25:22 PM</td>
+										<td class='linked' test-id='1'>UPSC_Registration</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='category-name'></h5>
+		</div>
+	</div>
+</div>
+<!-- category view -->
+<div id='author-view' class='view hide'>
+    <section id='controls'>
+        <div class='controls grey lighten-4'>
+            <!-- search -->
+            <div class='chip transparent' alt='Search Authors' title='Search Authors'>
+                <a href="#" class='search-div'>
+                    <i class='material-icons'>search</i> Search
+                </a>
+
+                <div class='input-field left hide'>
+                    <input id='search-tests' type='text' class='validate browser-default' placeholder='Search Authors...'>
+                </div>
+
+            </div>
+            <!-- search -->
+        </div>
+    </section>
+
+    <div class='subview-left left'>
+
+        <div class='view-summary'>
+            <h5>Authors</h5>
+                <ul id='author-collection' class='author-collection'>
+
+                        <li class='author displayed active'>
+                            <div class='author-heading'>
+                                <span class='author-name'>VinayLam</span>
+                                <span class='author-status right'>
+                                        <span class='label pass'>1</span>
+						        </span>
+                            </div>
+                            <div class='author-content hide'>
+                                <div class='author-status-counts'>
+                                    <span class='label green accent-4 white-text'>Passed: 1</span>
+                                    
+                                    
+                                </div>
+
+                                <div class='author-tests'>
+                                    <table class='bordered table-results'>
+                                        <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>TestName</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Apr 23, 2024 03:25:22 PM</td>
+                                                <td class='linked' test-id='1'>UPSC_Registration</td>
+                                                <td><span class='test-status pass'>pass</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+
+                </ul>
+        </div>
+    </div>
+
+    <div class='subview-right left'>
+        <div class='view-summary'>
+            <h5 class='author-name'></h5>
+        </div>
+    </div>
+</div>
+<!-- exception view -->
+<div id='dashboard-view' class='view hide'>
+	<div class='card-panel transparent np-v'>
+		<h5>Dashboard</h5>
+
+		<div class='row'>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Tests
+					<div class='panel-lead'>1</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Steps
+					<div class='panel-lead'>85</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Start
+					<div class='panel-lead'>Apr 23, 2024 03:25:22 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+			 		End
+			 		<div class='panel-lead'>Apr 23, 2024 03:25:52 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Time Taken
+					<div class='panel-lead'>0h 0m 30s+38ms</div>
+				</div>
+			</div>
+			<div class='col s6'>
+				<div class='card-panel dashboard-categories'>
+					<span class='right label cyan white-text'>Categories</span><p>&nbsp;</p>
+					
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Passed</th>
+							<th>Failed</th>
+							<th>Others</th>
+							<th>Passed %</th>
+						</tr>
+						<tr>
+							<td>Sanity</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0</td>
+							<td>
+									100%
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- dashboard view -->
+<!-- testrunner-logs view -->
+		</div>
+		<!-- container -->
+
+		<script>
+			var statusGroup = {
+				passParent: 1,
+				failParent: 0,
+				fatalParent: 0,
+				errorParent: 0,
+				warningParent: 0,
+				skipParent: 0,
+				exceptionsParent: 0,
+				
+				passChild: 85,
+				failChild: 0,
+				fatalChild: 0,
+				errorChild: 0,
+				warningChild: 0,
+				skipChild: 0,
+				infoChild: 0,
+				exceptionsChild: 0,
+				
+				passGrandChild: 0,
+				failGrandChild: 0,
+				fatalGrandChild: 0,
+				errorGrandChild: 0,
+				warningGrandChild: 0,
+				skipGrandChild: 0,
+				infoGrandChild: 0,
+				exceptionsGrandChild: 0,
+			};
+		</script>
+		
+			<script src='https://cdn.rawgit.com/anshooarora/extentreports-java/fca20fb7653aade98810546ab96a2a4360e3e712/dist/js/extent.js' type='text/javascript'></script>
+		
+		
+ 		<script type='text/javascript'>
+ 		</script>
+	</body>
+	
+</html>
